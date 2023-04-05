@@ -1,0 +1,40 @@
+https://github.com/flipkart-incubator/zjsonpatch/blob/master/src/main/java/com/flipkart/zjsonpatch/JsonDiff.java -- has move/copy but only simplistically, if literally unchanged, and in source itself [not part of intermediate result of diff sequence]
+https://github.com/java-json-tools/json-patch/blob/55b27b96045baa4ef356b2b183304551f64a18e4/src/main/java/com/github/fge/jsonpatch/diff/DiffProcessor.java#L67 just detects findUnchangedValue, in original source, see same caveats as result
+https://github.com/wI2L/jsondiff/blob/f912ef02d806c4a21a2dcb27ebd92aa19edde514/differ.go#L279 same ting, this time called findUnchanged but with same structure
+
+https://benjamine.github.io/jsondiffpatch/demo/index.html does only very restricted move and not copy at all
+ditto https://chbrown.github.io/rfc6902/
+
+With move/copy:
+
+Chawathe, S., Molina, H.G.: Meaningful Change Detection in Structured Data. In: Proc. of ACM SIGMOD 1997, pp. 26–37 (1997)
+
+@inproceedings{Lee2006XTreeDE,
+  title={X-Tree Diff+: Efficient Change Detection Algorithm in XML Documents},
+  author={Suk-Kyoon Lee and Dong Ah Kim},
+  booktitle={EUC},
+  year={2006}
+}
+
+Xu, H., Wu, Q., Wang, H., Yang, G., Jia, Y. (2002). KF-Diff+: Highly Efficient Change Detection Algorithm for XML Documents. In: Meersman, R., Tari, Z. (eds) On the Move to Meaningful Internet Systems 2002: CoopIS, DOA, and ODBASE. OTM 2002. Lecture Notes in Computer Science, vol 2519. Springer, Berlin, Heidelberg. https://doi.org/10.1007/3-540-36124-3_80
+
+@article{Lee2004AnEA,
+  title={An efficient algorithm to compute differences between structured documents},
+  author={Kyong-Ho Lee and Yoon-Chul Choy and Sung-Bae Cho},
+  journal={IEEE Transactions on Knowledge and Data Engineering},
+  year={2004},
+  volume={16},
+  pages={965-979}
+}
+
+
+--------
+
+@article{Finis2013RWSDiffFA,
+  title={RWS-Diff: flexible and efficient change detection in hierarchical data},
+  author={Jan Finis and Martin Raiber and Nikolaus Augsten and Robert Brunel and Alfons Kemper and Franz F{\"a}rber},
+  journal={Proceedings of the 22nd ACM international conference on Information \& Knowledge Management},
+  year={2013}
+}
+
+deleteLeaf/deleteSubtree irrelevant. insertSubtree kind of irrelevant? why use? insertLeaf notionally kind of has to be there, but... "infinitely" expensive because node is a pointer. so just left with rename/move/copy, and rename not that interesting. sort of, but... to be fair, algorithm doesn't do anything fancy re insert/deleteLeaf either. interesting part is this proximity indexing scheme
